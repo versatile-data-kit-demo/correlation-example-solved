@@ -88,7 +88,7 @@ Please open the following MyBinder to get started on the exercises:
 
 You can find the **solved** MyBinder environment here:
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dvalkova/amld-correlation-example/HEAD?labpath=data_job_run.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/versatile-data-kit-amld/correlation-example-solved/HEAD?labpath=setup.ipynb)
 
 For more information on MyBinder, please visit: https://mybinder.readthedocs.io 
 
