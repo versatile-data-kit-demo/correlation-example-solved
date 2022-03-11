@@ -84,7 +84,7 @@ vdk deploy
 ## Exercises
 Please open the following MyBinder to get started on the exercises:
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dvalkova/amld-correlation-example/HEAD?labpath=data_job_run.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/versatile-data-kit-amld/correlation-example-unsolved/HEAD?labpath=setup.ipynb)
 
 You can find the **solved** MyBinder environment here:
 
