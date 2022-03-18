@@ -40,6 +40,7 @@ df = pd.read_sql_query(
 )
 # Transform into datetime Series
 df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
+st.dataframe(df)
 
 # Plot # COVID cases vs no-scent complaints over time
 fig, ax = plt.subplots(figsize=(12, 6))
@@ -62,13 +63,14 @@ st.pyplot(fig=plt)
 st.header('Weekly correlation between "no scent" reviews and covid cases')
 
 # Current period correlation
-corr_coeff = round(df[df['date']==max(df['date'])]['correlation_coeff'], 3)
+corr_coeff = pd.to_numeric(df[df['date']==max(df['date'])]['correlation_coeff'], errors='coerce')
 st.metric("The current correlation coefficient is:", corr_coeff)
 
 # Plot the correlation coefficients over time
 st.write('Correlation coefficient over time:')
 df = df.rename(columns={'date': 'index'}).set_index('index')
-st.line_chart(data=df[['correlation_coeff']])
+df['correlation_coeff'] = df['correlation_coeff'].astype(float)
+st.line_chart(data=df[['correlation_coeff']].fillna(0))
 # Show data in a table
 st.write('Underlying data:')
 df = df.reset_index().rename(columns={'index': 'week'}).sort_values('week', ascending=False)
