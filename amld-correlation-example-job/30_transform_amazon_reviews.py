@@ -47,7 +47,7 @@ def run(job_input: IJobInput):
 
         # Calculate total number of (negative) reviews per day
         df_group = df.groupby('date').count().reset_index()
-        df_group = df_group.drop(columns=['review']).rename(columns={'flag_no_scent': 'num_negative_reviews'})
+        df_group = df_group.drop(columns=['flag_no_scent']).rename(columns={'review': 'num_negative_reviews'})
 
         # Calculate number of "no scent" reviews per day
         df_group2 = df[df['flag_no_scent']==True].groupby('date').count().reset_index()
