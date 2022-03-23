@@ -45,7 +45,7 @@ def run(job_input: IJobInput):
     # Keep only the dates which are not present in the table already (based on last_date_covid property)
     df_covid = df_covid[df_covid['obs_date'] > props["last_date_covid"]]
 
-    # Ingest the dictionary into a SQLite database using VDK's job_input method (if any results are fetched)
+    # Ingest the dictionary into a cloud Trino database using VDK's job_input method (if any results are fetched)
     if len(df_covid) > 0:
         job_input.send_tabular_data_for_ingestion(
             rows=df_covid.values,
