@@ -70,6 +70,8 @@ def run(job_input: IJobInput):
         log.info(len(date_result))
 
         # In each page, check whether there are more dates than reviews (empty reviews with photo only) and remove them
+        # Essentially, we are removing the last list element from date_result (if date_result list is longer than rev_result).
+        # This has some degree of error in it, but is chosen as an approach for simplicity and illustrative purposes.
         while len(rev_result) < len(date_result):
             date_result.pop(-1)
 
@@ -87,7 +89,7 @@ def run(job_input: IJobInput):
         df.loc[i, 'Review'] = webscrape.remove_emoji(df.loc[i, 'Review'])
     log.info(f"Shape of the review dataset: {df.shape}")
 
-    # Ingest the dataframe into a SQLite database using VDK's job_input method (if any results are fetched)
+    # Ingest the dataframe into a cloud Trino database using VDK's job_input method (if any results are fetched)
     if len(df) > 0:
         job_input.send_tabular_data_for_ingestion(
             rows=df.values,
