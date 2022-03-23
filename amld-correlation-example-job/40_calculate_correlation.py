@@ -67,7 +67,8 @@ def run(job_input: IJobInput):
     df_merged_weekly = df_merged_weekly.rename(columns={'number_of_covid_cases_daily': 'number_of_covid_cases_weekly'})\
                                        .drop(columns=["number_of_covid_cases"])
 
-    # Calculate correlation coefficients for each week in the df_merged_weekly table
+    # Calculate correlation coefficients for each week in the df_merged_weekly table in a cumulative manner: 
+    # i.e. on the week of 14th March 2022, we take into consideration all data at and prior to this week (i.e. the entire array of values)
     corr_coeff = [np.nan]
     for i in range(1, len(df_merged_weekly)):
         corr_coeff.append(df_merged_weekly['num_no_scent_reviews'][:i]
