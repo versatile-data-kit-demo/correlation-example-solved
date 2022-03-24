@@ -84,11 +84,16 @@ vdk deploy
 ## Exercises
 Please open the following MyBinder to get started on the exercises:
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/versatile-data-kit-amld/correlation-example-unsolved/HEAD?labpath=setup.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/versatile-data-kit-amld/correlation-example-unsolved/HEAD?urlpath=lab/tree/setup.ipynb)
 
-You can find the **solved** MyBinder environment here:
+If you have any issue with above link try 
+ - [this one](https://ovh.mybinder.org/v2/gh/versatile-data-kit-amld/correlation-example-unsolved/HEAD?urlpath=lab/tree/setup.ipynb)
+ - [or this](https://gesis.mybinder.org/v2/gh/versatile-data-kit-amld/correlation-example-unsolved/HEAD?urlpath=lab/tree/setup.ipynb)
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/versatile-data-kit-amld/correlation-example-solved/HEAD?labpath=setup.ipynb)
+
+You can find the *solved* MyBinder environment [here](https://mybinder.org/v2/gh/versatile-data-kit-amld/correlation-example-solved/HEAD?urlpath=lab/tree/setup.ipynb)
+
+
 
 For more information on MyBinder, please visit: https://mybinder.readthedocs.io 
 
@@ -105,4 +110,5 @@ You also created an interactive Streamlit dashboard which showcased the relation
 
 **Congrats!**
 
-*Author of the example scenario: [Desislava Valkova](https://www.linkedin.com/in/desislava-valkova)*
+
+**[> Go back to main page of the Workshop.](https://github.com/versatile-data-kit-amld/workshop/blob/main/README.md#covid-vs-no-scent-complaints)**
