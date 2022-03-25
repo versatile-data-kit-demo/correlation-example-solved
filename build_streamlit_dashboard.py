@@ -40,7 +40,6 @@ df = pd.read_sql_query(
 )
 # Transform into datetime Series
 df['date'] = pd.to_datetime(df['date'], format='%Y-%m-%d')
-st.dataframe(df)
 
 # Plot # COVID cases vs no-scent complaints over time
 fig, ax = plt.subplots(figsize=(12, 6))
