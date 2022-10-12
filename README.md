@@ -82,7 +82,7 @@ vdk deploy
 ```
 
 ## Exercises
-Please open the following MyBinder to get started on the exercises:
+Please open the following MyBinder to find the solved version of the exercises:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/versatile-data-kit-demo/correlation-example-solved/HEAD)
 
 A few tips: 
@@ -94,7 +94,7 @@ If you have any issue with the above link, please try:
  - [Second backup link](https://gesis.mybinder.org/v2/gh/versatile-data-kit-amld/correlation-example-solved/HEAD?urlpath=lab/tree/setup.ipynb)
 
 
-You can find the *solved* MyBinder environment [here](https://mybinder.org/v2/gh/versatile-data-kit-amld/correlation-example-solved/HEAD?urlpath=lab/tree/setup.ipynb).
+You can find the *unsolved* MyBinder environment [here](https://mybinder.org/v2/gh/versatile-data-kit-amld/correlation-example-unsolved/HEAD?urlpath=lab/tree/setup.ipynb).
 
 
 
