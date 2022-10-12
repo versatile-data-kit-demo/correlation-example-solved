@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export DATABASE_URL=trino://aa9845eb53d7c45fbaf0667e64ba5406-556859698.us-west-1.elb.amazonaws.com:1094/mysql
+export DATABASE_URL=trino://user@aa9845eb53d7c45fbaf0667e64ba5406-556859698.us-west-1.elb.amazonaws.com:1094/mysql
 export VDK_TRINO_HOST=aa9845eb53d7c45fbaf0667e64ba5406-556859698.us-west-1.elb.amazonaws.com
 export VDK_TRINO_PORT=1094
 export VDK_TRINO_USE_SSL=False
