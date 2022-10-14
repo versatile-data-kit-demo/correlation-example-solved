@@ -83,18 +83,18 @@ vdk deploy
 
 ## Exercises
 Please open the following MyBinder to find the solved version of the exercises:
-[![Binder](https://mybinder.org/badge_logo.svg)](https://gesis.mybinder.org/v2/gh/versatile-data-kit-amld/correlation-example-solved/HEAD?urlpath=lab/tree/setup.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://gesis.mybinder.org/v2/gh/versatile-data-kit-demo/correlation-example-solved/HEAD?urlpath=lab/tree/setup.ipynb)
 
 A few tips: 
  - The mybinder notebook has idle timeout of 10 minutes. One trick to prevent timeout after launching is to open a terminal and execute: `while echo "foo"; do sleep 100; done`
 
 
 If you have any issue with the above link, please try:
- - [First backup link](http://a1a89deb4a79f44279c470dada8dab7f-727617251.us-west-1.elb.amazonaws.com/v2/gh/versatile-data-kit-amld/correlation-example-solved/HEAD?urlpath=lab/tree/setup.ipynb)
+ - [First backup link](http://a1a89deb4a79f44279c470dada8dab7f-727617251.us-west-1.elb.amazonaws.com/v2/gh/versatile-data-kit-demo/correlation-example-solved/HEAD?urlpath=lab/tree/setup.ipynb)
  - [Second backup link](https://mybinder.org/v2/gh/versatile-data-kit-demo/correlation-example-solved/HEAD)
 
 
-You can find the *unsolved* MyBinder environment [here](https://mybinder.org/v2/gh/versatile-data-kit-amld/correlation-example-unsolved/HEAD?urlpath=lab/tree/setup.ipynb).
+You can find the *unsolved* MyBinder environment [here](https://mybinder.org/v2/gh/versatile-data-kit-demo/correlation-example-unsolved/HEAD?urlpath=lab/tree/setup.ipynb).
 
 
 
