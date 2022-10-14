@@ -10,23 +10,7 @@ from vdk.api.job_input import IJobInput
 
 log = logging.getLogger(__name__)
 
-
-def run(job_input: IJobInput):
-    """
-    Scrape bad Amazon Reviews for one of the most popular Yankee candles on Amazon
-    and ingest them into a cloud Trino database.
-    """
-
-    log.info(f"Starting job step {__name__}")
-
-    # Create/retrieve the data job property storing latest ingested date for yankee_candle_reviews table.
-    # If the property does not exist, set it to "2020-01-01" (around the start of the pandemic).
-    props = job_input.get_all_properties()
-    if "last_date_amazon" in props:
-        pass
-    else:
-        props["last_date_amazon"] = '2020-01-01'
-
+def get_amazon_reviews(last_date_amazon: datetime):
     # Initialize variables
     i = 1
     rev_result = []
@@ -35,7 +19,7 @@ def run(job_input: IJobInput):
     date = datetime.now().strftime("%Y-%m-%d")
 
     # Go through the review pages and scrape reviews
-    while date > props["last_date_amazon"]:
+    while date > last_date_amazon:
         log.info(f'Rendering page {i}...')
         # Parameterize the URL to iterate over the pages
         url = f"https://www.amazon.com/Yankee-Candle-Large-Balsam-Cedar/product-reviews/B000JDGC78/ref=cm_cr_arp_d_\
@@ -70,8 +54,6 @@ def run(job_input: IJobInput):
         log.info(len(date_result))
 
         # In each page, check whether there are more dates than reviews (empty reviews with photo only) and remove them
-        # Essentially, we are removing the last list element from date_result (if date_result list is longer than rev_result).
-        # This has some degree of error in it, but is chosen as an approach for simplicity and illustrative purposes.
         while len(rev_result) < len(date_result):
             date_result.pop(-1)
 
@@ -82,11 +64,30 @@ def run(job_input: IJobInput):
     df = pd.DataFrame(zip(date_result, rev_result), columns=['Date', 'Review'])
     # Since the while loop above always executes at least once (current timestamp > last ingested review), the first review
     # page will always be scraped, so delete the already ingested records manually from the df using the DJ property
-    df = df[df['Date'] > props["last_date_amazon"]]
+    df = df[df['Date'] > last_date_amazon]
     # Remove emojis from the Review column since they are not utf-8 compliant and break ingestion
     for i in range(0, len(df)):
         # Go through each review and clean it if needed
         df.loc[i, 'Review'] = webscrape.remove_emoji(df.loc[i, 'Review'])
+    return df
+
+def run(job_input: IJobInput):
+    """
+    Scrape bad Amazon Reviews for one of the most popular Yankee candles on Amazon
+    and ingest them into a cloud Trino database.
+    """
+
+    log.info(f"Starting job step {__name__}")
+
+    # Create/retrieve the data job property storing latest ingested date for yankee_candle_reviews table.
+    # If the property does not exist, set it to "2020-01-01" (around the start of the pandemic).
+    props = job_input.get_all_properties()
+    if "last_date_amazon" in props:
+        pass
+    else:
+        props["last_date_amazon"] = '2020-01-01'
+
+    df = get_amazon_reviews(props["last_date_amazon"])
     log.info(f"Shape of the review dataset: {df.shape}")
 
     # Ingest the dataframe into a cloud Trino database using VDK's job_input method (if any results are fetched)
