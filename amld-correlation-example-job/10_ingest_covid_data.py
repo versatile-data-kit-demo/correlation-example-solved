@@ -7,6 +7,26 @@ from vdk.api.job_input import IJobInput
 
 log = logging.getLogger(__name__)
 
+def get_covid_data(url: str, last_date_covid):
+    # Make a GET request to the COVID-19 API
+    response = requests.get(url)
+    # Check if the request was successful
+    response.raise_for_status()
+
+    dates_cases = response.json()['All']['dates']
+    # Reformat the dictionary
+    dates_cases_dict = {'obs_date': [], 'number_of_cases': []}
+
+    for key, value in dates_cases.items():
+        dates_cases_dict['obs_date'].append(key)
+        dates_cases_dict['number_of_cases'].append(value)
+
+    # Convert the dictionary into a DF
+    df_covid = pd.DataFrame.from_dict(dates_cases_dict)
+    # Keep only the dates which are not present in the table already (based on last_date_covid property)
+    df_covid = df_covid[df_covid['obs_date'] > last_date_covid]
+    
+    return df_covid
 
 def run(job_input: IJobInput):
     """
@@ -27,23 +47,7 @@ def run(job_input: IJobInput):
     # Initialize URL
     url = "https://covid-api.mmediagroup.fr/v1/history?country=US&status=confirmed"
 
-    # Make a GET request to the COVID-19 API
-    response = requests.get(url)
-    # Check if the request was successful
-    response.raise_for_status()
-
-    dates_cases = response.json()['All']['dates']
-    # Reformat the dictionary
-    dates_cases_dict = {'obs_date': [], 'number_of_cases': []}
-
-    for key, value in dates_cases.items():
-        dates_cases_dict['obs_date'].append(key)
-        dates_cases_dict['number_of_cases'].append(value)
-
-    # Convert the dictionary into a DF
-    df_covid = pd.DataFrame.from_dict(dates_cases_dict)
-    # Keep only the dates which are not present in the table already (based on last_date_covid property)
-    df_covid = df_covid[df_covid['obs_date'] > props["last_date_covid"]]
+    df_covid = get_covid_data(url, props["last_date_covid"])
 
     # Ingest the dictionary into a cloud Trino database using VDK's job_input method (if any results are fetched)
     if len(df_covid) > 0:
