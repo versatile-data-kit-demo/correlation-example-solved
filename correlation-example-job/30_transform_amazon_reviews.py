@@ -32,7 +32,7 @@ def run(job_input: IJobInput):
     reviews_raw = job_input.execute_query(
         f"""
         SELECT *
-        FROM yankee_candle_reviews
+        FROM {props['prefix']}_yankee_candle_reviews
         WHERE Date > '{props["last_date_amazon_transformed"]}'
         ORDER BY Date
         """
@@ -61,7 +61,7 @@ def run(job_input: IJobInput):
         job_input.send_tabular_data_for_ingestion(
             rows=df_group.values,
             column_names=df_group.columns.to_list(),
-            destination_table="yankee_candle_reviews_transformed"
+            destination_table="{props['prefix']}_yankee_candle_reviews_transformed"
         )
         # Reset the last_date property value to the latest date in the transformed db table
         props["last_date_amazon_transformed"] = max(df_group['date'])

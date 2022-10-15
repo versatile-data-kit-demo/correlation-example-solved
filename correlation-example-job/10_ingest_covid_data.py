@@ -54,7 +54,7 @@ def run(job_input: IJobInput):
         job_input.send_tabular_data_for_ingestion(
             rows=df_covid.values,
             column_names=df_covid.columns.to_list(),
-            destination_table="covid_cases_usa_daily"
+            destination_table="{props['prefix']}_covid_cases_usa_daily"
         )
         # Reset the last_date property value to the latest date in the covid source db table
         props["last_date_covid"] = max(df_covid['obs_date'])

@@ -34,7 +34,7 @@ def run(job_input: IJobInput):
     reviews = job_input.execute_query(
         f"""
         SELECT date, num_no_scent_reviews 
-        FROM yankee_candle_reviews_transformed
+        FROM {props['prefix']}_yankee_candle_reviews_transformed
         """
     )
     reviews_df = pd.DataFrame(reviews, columns=['date', 'num_no_scent_reviews'])
@@ -43,7 +43,7 @@ def run(job_input: IJobInput):
     covid = job_input.execute_query(
         f"""
         SELECT * 
-        FROM covid_cases_usa_daily
+        FROM {props['prefix']}_covid_cases_usa_daily
         """
     )
     covid_df = pd.DataFrame(covid, columns=['date', 'number_of_covid_cases'])
@@ -88,7 +88,7 @@ def run(job_input: IJobInput):
         job_input.send_tabular_data_for_ingestion(
             rows=df_merged_weekly.values,
             column_names=df_merged_weekly.columns.to_list(),
-            destination_table="weekly_correlation"
+            destination_table="{props['prefix']}_weekly_correlation"
         )
         # Reset the last_date property value to the latest date in the covid source db table
         props["last_date_correlation"] = max(df_merged_weekly['date'])

@@ -95,7 +95,7 @@ def run(job_input: IJobInput):
         job_input.send_tabular_data_for_ingestion(
             rows=df.values,
             column_names=df.columns.to_list(),
-            destination_table="yankee_candle_reviews"
+            destination_table="{props['prefix']}_yankee_candle_reviews"
         )
         # Reset the last_date property value to the latest date in the amazon source db table
         props["last_date_amazon"] = max(df['Date'])
