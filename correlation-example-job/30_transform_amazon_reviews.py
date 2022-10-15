@@ -61,7 +61,7 @@ def run(job_input: IJobInput):
         job_input.send_tabular_data_for_ingestion(
             rows=df_group.values,
             column_names=df_group.columns.to_list(),
-            destination_table="{props['prefix']}_yankee_candle_reviews_transformed"
+            destination_table=f"{props['prefix']}_yankee_candle_reviews_transformed"
         )
         # Reset the last_date property value to the latest date in the transformed db table
         props["last_date_amazon_transformed"] = max(df_group['date'])

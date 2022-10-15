@@ -88,7 +88,7 @@ def run(job_input: IJobInput):
         job_input.send_tabular_data_for_ingestion(
             rows=df_merged_weekly.values,
             column_names=df_merged_weekly.columns.to_list(),
-            destination_table="{props['prefix']}_weekly_correlation"
+            destination_table=f"{props['prefix']}_weekly_correlation"
         )
         # Reset the last_date property value to the latest date in the covid source db table
         props["last_date_correlation"] = max(df_merged_weekly['date'])
